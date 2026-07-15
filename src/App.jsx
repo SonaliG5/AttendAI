@@ -1,5 +1,5 @@
-import { analyzeSubject } from './lib/attendance'
 import { useState } from 'react'
+import { analyzeSubject } from './lib/attendance'
 import { Trash2, Plus } from 'lucide-react'
 import SubjectRow from './components/SubjectRow'
 import SummaryCard from './components/SummaryCard'
@@ -25,13 +25,20 @@ function App() {
   function updateSubject(id, field, value) {
     setSubjects(
       subjects.map((s) =>
-        s.id === id ? { ...s, [field]: value } : s
-      )
-    )
+        s.id === id ? { ...s, [field]: value } : s))
   }
 
+  function getSummary(results) {
+  const needsAttention = results.filter((s) => s.status === 'Low')
+  const strongest = results.reduce(
+    (best, s) => (!best || s.currentPercent > best.currentPercent ? s : best),
+    null
+  )
+  return { needsAttention, strongest }
+}
 
-function generateReport() {
+
+  function generateReport() {
   const results = subjects
     .filter((s) => s.name.trim() !== '' && s.total > 0)
     .map((s) => ({
@@ -40,16 +47,6 @@ function generateReport() {
     }))
   setReport(results)
   setSummary(getSummary(results))
-}
-
-
-function getSummary(results) {
-  const needsAttention = results.filter((s) => s.status === 'Low')
-  const strongest = results.reduce(
-    (best, s) => (!best || s.currentPercent > best.currentPercent ? s : best),
-    null
-  )
-  return { needsAttention, strongest }
 }
 
 
@@ -67,16 +64,16 @@ function getSummary(results) {
           </tr>
         </thead>
      <tbody>
-  {subjects.map((s) => (
-    <SubjectRow
-      key={s.id}
-      subject={s}
-      onUpdate={updateSubject}
-      onRemove={removeSubject}
+      {subjects.map((s) => (
+        <SubjectRow
+        key={s.id}
+        subject={s}
+        onUpdate={updateSubject}
+        onRemove={removeSubject}
     />
   ))}
 </tbody>
-      </table>
+</table>
 
 
 <div className="mt-6 flex items-center gap-4">
@@ -100,29 +97,27 @@ function getSummary(results) {
     Generate Report
   </button>
 </div>
-      <button
-        onClick={addSubject}
-        className="mt-4 flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-      >
-        <Plus size={18} /> Add Subject
-      </button>
-      {report && (
+
+<button
+  onClick={addSubject}
+  className="mt-4 flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+  >
+  <Plus size={18} /> Add Subject
+</button>
+
+
+{report && (
   <div className="mt-8">
     <h2 className="text-xl font-bold text-gray-800 mb-4">Report</h2>
-
     <SummaryCard summary={summary} />
-
-
    <div className="space-y-3">
   {report.map((s) => (
     <SubjectReport key={s.id} subject={s} />
   ))}
 </div>
-  </div>
-  
+</div>
 )}
-
-    </div>
+</div>
   )
 }
 
