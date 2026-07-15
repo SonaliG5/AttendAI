@@ -1,6 +1,9 @@
 import { analyzeSubject } from './lib/attendance'
 import { useState } from 'react'
 import { Trash2, Plus } from 'lucide-react'
+import SubjectRow from './components/SubjectRow'
+import SummaryCard from './components/SummaryCard'
+import SubjectReport from './components/SubjectReport'
 
 function App() {
   const [subjects, setSubjects] = useState([])
@@ -63,45 +66,16 @@ function getSummary(results) {
             <th className="p-3"></th>
           </tr>
         </thead>
-        <tbody>
-          {subjects.map((s) => (
-            <tr key={s.id} className="border-t border-gray-200">
-              <td className="p-3">
-                <input
-                  type="text"
-                  value={s.name}
-                  onChange={(e) => updateSubject(s.id, 'name', e.target.value)}
-                  placeholder="e.g. Data Structures"
-                  className="w-full border border-gray-300 rounded px-2 py-1"
-                />
-              </td>
-              <td className="p-3">
-                <input
-                  type="number"
-                  value={s.attended}
-                  onChange={(e) => updateSubject(s.id, 'attended', Number(e.target.value))}
-                  className="w-20 border border-gray-300 rounded px-2 py-1"
-                />
-              </td>
-              <td className="p-3">
-                <input
-                  type="number"
-                  value={s.total}
-                  onChange={(e) => updateSubject(s.id, 'total', Number(e.target.value))}
-                  className="w-20 border border-gray-300 rounded px-2 py-1"
-                />
-              </td>
-              <td className="p-3">
-                <button
-                  onClick={() => removeSubject(s.id)}
-                  className="text-red-500 hover:text-red-700"
-                >
-                  <Trash2 size={18} />
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
+     <tbody>
+  {subjects.map((s) => (
+    <SubjectRow
+      key={s.id}
+      subject={s}
+      onUpdate={updateSubject}
+      onRemove={removeSubject}
+    />
+  ))}
+</tbody>
       </table>
 
 
@@ -136,39 +110,14 @@ function getSummary(results) {
   <div className="mt-8">
     <h2 className="text-xl font-bold text-gray-800 mb-4">Report</h2>
 
-    {summary && (
-  <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm">
-    {summary.needsAttention.length > 0 ? (
-      <p className="text-red-700">
-        ⚠️ {summary.needsAttention.length} subject{summary.needsAttention.length === 1 ? '' : 's'} need attention: {' '}
-        {summary.needsAttention.map((s) => s.name).join(', ')}
-      </p>
-    ) : (
-      <p className="text-green-700">✅ All subjects are on track.</p>
-    )}
-    {summary.strongest && (
-      <p className="text-gray-700 mt-1">
-        💪 Strongest subject: <strong>{summary.strongest.name}</strong> at {summary.strongest.currentPercent.toFixed(1)}%
-      </p>
-    )}
-  </div>
-)}
+    <SummaryCard summary={summary} />
 
 
-    <div className="space-y-3">
-      {report.map((s) => (
-        <div key={s.id} className="bg-white border border-gray-200 rounded-lg p-4">
-          <div className="flex justify-between items-center">
-            <span className="font-semibold">{s.name}</span>
-            <span className={s.status === 'Safe' ? 'text-green-600' : 'text-red-600'}>
-              {s.status === 'Safe' ? '✅ Safe' : '⚠️ Low'}
-            </span>
-          </div>
-          <p className="text-sm text-gray-600 mt-1">{s.recommendation}</p>
-          <p className="text-xs text-gray-400 mt-1">Priority: {s.priority}</p>
-        </div>
-      ))}
-    </div>
+   <div className="space-y-3">
+  {report.map((s) => (
+    <SubjectReport key={s.id} subject={s} />
+  ))}
+</div>
   </div>
   
 )}
