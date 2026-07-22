@@ -52,7 +52,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-8">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">AttendAI</h1>
+      <h1 className="text-2xl font-bold text-gray-800 mb-6">AttendTrack</h1>
 
       <table className="w-full bg-white border border-gray-200 rounded-lg overflow-hidden">
         <thead className="bg-gray-100">

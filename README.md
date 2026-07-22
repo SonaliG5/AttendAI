@@ -1,4 +1,4 @@
-# AttendAI
+# AttendTrack
 
 A smart attendance tracker that doesn't just show your attendance percentage—it tells students exactly how many classes they need to attend or can safely skip to satisfy their university's attendance requirement.
 ![Screenshot](./screenshot.png)
