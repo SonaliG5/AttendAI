@@ -1,14 +1,16 @@
-// src/lib/attendance.js
 
-/**
- * Given attended/total classes and a requirement threshold,
- * returns the current status, the recommendation, and priority.
- *
- * r = requirement as a fraction (e.g. 0.75 for 75%)
- */
-export function analyzeSubject(attended, total, requirementPercent) {
-  const r = requirementPercent / 100
+export function analyzeSubject(attended, total, requirementPercent, isComplete = false) {
+   const r = requirementPercent / 100
   const currentPercent = total === 0 ? 0 : (attended / total) * 100
+  if (isComplete) {
+    return {
+      status: currentPercent >= requirementPercent ? 'Safe' : 'Low',
+      recommendation: null,
+      priority: null,
+      currentPercent,
+      isComplete: true,
+    }
+  }
   const isSafe = currentPercent >= requirementPercent
 
   if (isSafe) {
