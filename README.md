@@ -3,13 +3,13 @@
 A smart attendance tracker that doesn't just show your attendance percentage—it tells students exactly how many classes they need to attend or can safely skip to satisfy their university's attendance requirement.
 
 ### Login
-![AttendTrack login screen](./screenshot-login.png)
+![AttendTrack login screen](./attendaiscreenshot-login.png)
 
 ### Ledger
-![AttendTrack subject ledger](./screenshot-ledger.png)
+![AttendTrack subject ledger](./attendaiscreenshot-ledger.png)
 
 ### Report
-![AttendTrack generated report](./screenshot-report.png)
+![AttendTrack generated report](./attendaiscreenshot-report.png)
 
 ## Features
 
