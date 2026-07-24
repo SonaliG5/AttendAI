@@ -19,60 +19,60 @@ function App() {
 
   useEffect(() => {
     if (!token) return
-    fetch('http://localhost:3001/api/subjects', {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    fetch(`${import.meta.env.VITE_API_URL}/api/subjects`, {
+  headers: { Authorization: `Bearer ${token}` },
+})
       .then((res) => res.json())
       .then((data) => setSubjects(data))
       .catch((err) => console.error('Failed to load subjects:', err))
   }, [token])
 
-  async function addSubject() {
-    try {
-      const res = await fetch('http://localhost:3001/api/subjects', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ name: '', attended: 0, total: 0 }),
-      })
-      const newSubject = await res.json()
-      setSubjects([...subjects, newSubject])
-    } catch (err) {
-      console.error('Failed to add subject:', err)
-    }
+ async function addSubject() {
+  try {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/subjects`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ name: '', attended: 0, total: 0 }),
+    })
+    const newSubject = await res.json()
+    setSubjects([...subjects, newSubject])
+  } catch (err) {
+    console.error('Failed to add subject:', err)
   }
+}
 
-  async function updateSubject(id, field, value) {
-    const subject = subjects.find((s) => s.id === id)
-    const updated = { ...subject, [field]: value }
-    setSubjects(subjects.map((s) => (s.id === id ? updated : s)))
+ async function updateSubject(id, field, value) {
+  const subject = subjects.find((s) => s.id === id)
+  const updated = { ...subject, [field]: value }
+  setSubjects(subjects.map((s) => (s.id === id ? updated : s)))
 
-    try {
-      await fetch(`http://localhost:3001/api/subjects/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-        body: JSON.stringify({
-          name: updated.name,
-          attended: updated.attended,
-          total: updated.total,
-          is_complete: updated.is_complete ?? false,
-        }),
-      })
-    } catch (err) {
-      console.error('Failed to update subject:', err)
-    }
+  try {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/subjects/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify({
+        name: updated.name,
+        attended: updated.attended,
+        total: updated.total,
+        is_complete: updated.is_complete ?? false,
+      }),
+    })
+  } catch (err) {
+    console.error('Failed to update subject:', err)
   }
+}
 
-  async function removeSubject(id) {
-    setSubjects(subjects.filter((s) => s.id !== id))
-    try {
-      await fetch(`http://localhost:3001/api/subjects/${id}`, {
-        method: 'DELETE',
-        headers: { Authorization: `Bearer ${token}` },
-      })
-    } catch (err) {
-      console.error('Failed to delete subject:', err)
-    }
+async function removeSubject(id) {
+  setSubjects(subjects.filter((s) => s.id !== id))
+  try {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/subjects/${id}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${token}` },
+    })
+  } catch (err) {
+    console.error('Failed to delete subject:', err)
   }
+}
 
   function getSummary(results) {
     const needsAttention = results.filter((s) => s.status === 'Low' && !s.isComplete)
