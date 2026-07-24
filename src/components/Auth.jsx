@@ -38,9 +38,9 @@ function Auth({ onAuthSuccess }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-8">
-      <div className="bg-white border border-gray-200 rounded-lg p-8 w-full max-w-sm">
-        <h1 className="text-xl font-bold text-gray-800 mb-1">AttendTrack</h1>
+    <div className="min-h-screen bg-[#F7F3E9] flex items-center justify-center p-8">
+  <div className="bg-white border border-[#E4DCC8] rounded-lg p-8 w-full max-w-sm">
+    <h1 className="text-xl font-bold text-[#1C2541] mb-1">AttendTrack</h1>
         <p className="text-sm text-gray-500 mb-6">
           {mode === 'login' ? 'Log in to your account' : 'Create a new account'}
         </p>
@@ -78,7 +78,7 @@ function Auth({ onAuthSuccess }) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-2 rounded text-sm font-medium hover:bg-blue-700 disabled:opacity-50"
+            className="w-full bg-[#1C2541] text-white py-2 rounded text-sm font-medium hover:bg-[#141B30] disabled:opacity-50"
           >
             {loading ? 'Please wait...' : mode === 'login' ? 'Log In' : 'Sign Up'}
           </button>

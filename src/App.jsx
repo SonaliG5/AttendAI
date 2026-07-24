@@ -116,7 +116,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen bg-[#F7F3E9] p-8">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-800">AttendTrack</h1>
         <div className="flex items-center gap-3 text-sm text-gray-500">
@@ -127,8 +127,8 @@ function App() {
         </div>
       </div>
 
-      <table className="w-full bg-white border border-gray-200 rounded-lg overflow-hidden">
-        <thead className="bg-gray-100">
+     <table className="w-full bg-white border border-[#E4DCC8] rounded-lg overflow-hidden">
+  <thead className="bg-[#F0EBDC]">
           <tr>
             <th className="text-left p-3 text-sm font-semibold text-gray-600">Subject</th>
             <th className="text-left p-3 text-sm font-semibold text-gray-600">Attended</th>
@@ -165,7 +165,7 @@ function App() {
 
         <button
           onClick={generateReport}
-          className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
+         className="bg-[#1C2541] text-white px-4 py-2 rounded-lg hover:bg-[#141B30]"
         >
           Generate Report
         </button>
@@ -173,14 +173,14 @@ function App() {
 
       <button
         onClick={addSubject}
-        className="mt-4 flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+         className="mt-4 flex items-center gap-2 bg-[#C97C2C] text-white px-4 py-2 rounded-lg hover:bg-[#B36B21]"
       >
         <Plus size={18} /> Add Subject
       </button>
 
       {report && (
         <div className="mt-8">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">Report</h2>
+          <h2 className="text-xl font-bold text-[#1C2541] mb-4">Report</h2>
           <SummaryCard summary={summary} />
           <div className="space-y-3">
             {report.map((s) => (
