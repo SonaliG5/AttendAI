@@ -2,6 +2,9 @@
 
 A smart attendance tracker that doesn't just show your attendance percentage—it tells students exactly how many classes they need to attend or can safely skip to satisfy their university's attendance requirement.
 
+**##Live Demo**
+**Live App:** https://attend-ai-mocha.vercel.app/
+
 ### Login
 ![AttendTrack login screen](./attendaiscreenshot-login.png)
 
