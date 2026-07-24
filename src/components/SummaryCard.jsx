@@ -1,6 +1,14 @@
 function SummaryCard({ summary }) {
   if (!summary) return null
 
+  if (summary.needsAttention.length === 0 && !summary.strongest) {
+    return (
+      <div className="mb-4 p-4 bg-[#F0EBDC] border border-[#E4DCC8] rounded-lg text-sm text-[#5A5F73]">
+        No subjects added yet — add a subject above and fill in your attended/total classes to generate a report.
+      </div>
+    )
+  }
+
   return (
     <div className="mb-4 p-4 bg-[#FAEEDA] border border-[#F0DBAF] rounded-lg text-sm">
       {summary.needsAttention.length > 0 ? (
